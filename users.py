@@ -31,17 +31,17 @@ class Users:
     @classmethod
     def find_by_first_name(cls, first_name):
 
-        for user in cls.user_list:
-            if user.first_name == first_name:
-                return user
+        for users in cls.users_list:
+            if users.first_name == first_name:
+                return users
 
     @classmethod
-    def user_exist(cls, first_name):
-        for user in cls.user_list:
-            if user.first_name == first_name:
+    def users_exist(cls, first_name):
+        for users in cls.users_list:
+            if users.first_name == first_name:
                 return True
         return False
 
     @classmethod
     def display_users(cls):
-        return cls.user_list
+        return cls.users_list
