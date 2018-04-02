@@ -52,10 +52,19 @@ class Passwords:
         """
         Passwords.password_list.append(self)
 
-    """
-    Below we encounter decorators in python.
-    They basically allow us to make simple modifications to callable objects
-    like functions, methods, or classes
+@classmethod
+    def Accounts_exists(cls, account_name):
+        """
+        This are python decorators they check if an account exists from password_list and takes in the name and returns a boolean if the matching account is found.
+        """
+        for Accounts in cls.password_list:
+            if Accounts.account_name == account_name:
+                return True
+        return False
 
-    Here we want to allow some of our functions to apply to the entire class.
-    """
+    @classmethod
+    def display_Accounts(cls):
+        """
+        This method returns different account list.
+        """
+        return cls.password_list
