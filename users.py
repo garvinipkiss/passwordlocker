@@ -19,5 +19,29 @@ class Users:
         """
         save_users saves our users objects into users_list
         """
-#
+
         Users.users_list.append(self)
+
+    def delete_users(self):
+        """
+        delete_users method deletes saved users from the users_list.
+        """
+        Users.users_list.remove(self)
+
+    @classmethod
+    def find_by_first_name(cls, first_name):
+
+        for user in cls.user_list:
+            if user.first_name == first_name:
+                return user
+
+    @classmethod
+    def user_exist(cls, first_name):
+        for user in cls.user_list:
+            if user.first_name == first_name:
+                return True
+        return False
+
+    @classmethod
+    def display_users(cls):
+        return cls.user_list
