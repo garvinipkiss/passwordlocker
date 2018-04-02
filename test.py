@@ -37,3 +37,4 @@ class TestPasswords(unittest.TestCase):
 
         self.new_Accounts.save_account()
         self.assertEqual(len(Passwords.password_list), 1)
+        
