@@ -68,3 +68,31 @@ class Passwords:
         This method returns different account list.
         """
         return cls.password_list
+
+    @classmethod
+    def find_by_account(cls, account_name):
+        """
+        This method takes in an account name and returns the password matching
+        the account.
+        """
+        for Accounts in cls.password_list:
+            if Accounts.account_name == account_name:
+                return profile
+
+    @classmethod
+    def copy_passwords(cls, account_name):
+        password_found = Passwords.find_by_account(account_name)
+        pyperclip.copy(password_found.account_password)
+
+    @classmethod
+    def password_gen(cls, password_length):
+        string = "abcdefghigjkmnopqrstuvwxyz1234567890-_=+%[]{}\|"'?:;>./,`!@#$^&*()`'"
+        password = "".join(random.sample(string, int(password_length)))
+        accounts_passsword = password
+        return accounts_passsword
+
+# print("Choose more than eight characters with numbers and asterics")
+# password_length = int(input())
+# string = "abcdefghigjkmnopqrstuvwxyz1234567890-_=+%[]{}\|"'?:;>./,`!@#$^&*()`"
+# password = "".join(random.sample(string, password_length))
+# print(password)
