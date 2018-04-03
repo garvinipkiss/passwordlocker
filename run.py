@@ -98,3 +98,34 @@ def copy_password(account_name):
     This function copys passwords.
     """
     return Passwords.copy_password()
+
+
+def password_gen(password_length):
+    return Passwords.password_gen(password_length)
+
+
+def main():
+    print("Hi! ")
+    user_name = input()
+    print("")
+
+    print(f"Hi {user_name}. ?")
+    print("")
+
+    while True:
+        print("""Use the following keys :
+              create - create new account
+              log in - log in to your password profiles
+              log out - log out of you account
+              exit - exit account list.""")
+        short_code = input().lower()
+        print("_" * 100)
+        if short_code == "create":
+            print("New PasswordLocker Account")
+            print("_" * 20)
+
+            print("Enter first name -")
+            f_name = input()
+
+            print("Enter last name -")
+            l_name = input()
