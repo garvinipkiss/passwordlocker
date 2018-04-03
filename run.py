@@ -222,3 +222,14 @@ def main():
                 else:
                     print("This account doesn't exist")
                     print("")
+
+                elif short_code == "exit":
+                print("")
+                print(
+                    "*" * 20 + " Thank you for using my app and welcome again feed me at https://github.com/garvinipkiss your friendly dev :) " + "*" * 20)
+                print("")
+                break
+
+
+if __name__ == '__main__':
+    main()
