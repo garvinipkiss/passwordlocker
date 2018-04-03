@@ -42,3 +42,59 @@ def check_existing_users(number):
     check_existing_users function checks if the users exists with that number and return Boolean
     """
     return Users.users_exist(number)
+
+
+def display_users():
+    """
+    This function displays users.
+    """
+    return Users.display_users()
+
+
+def copy_password(number):
+    """
+    This function copys passwords.
+    """
+    return Users.copy_password()
+
+
+def create_Accounts(account_name, account_password, password_length):
+    """
+    This function creates new_accounts
+    """
+    new_Accounts = Passwords(account_name, account_password, password_length)
+    return new_Accounts
+
+
+def save_Accounts(account):
+
+    Accounts.save_account()
+
+
+def find_Accounts(account_name):
+    """
+    This function finds accounts passswords
+    """
+    return Passwords.find_by_accounts(account_name)
+
+
+def Accounts_exists(account_name):
+    """
+    This function check if an account exists and returns a
+    boolean if found or not.
+    """
+    return Passwords.Accounts_exists(account_name)
+
+
+def display_Accounts():
+    """
+    This function displays all saved accounts
+    """
+    return Passwords.display_Accounts()
+
+
+def copy_password(account_name):
+    """
+    This function copys passwords.
+    """
+    return Passwords.copy_password()
