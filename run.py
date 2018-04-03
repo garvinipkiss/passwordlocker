@@ -1,6 +1,6 @@
 #!/usr/bin/env python3.6
-from app import Passwords
-from users import Users
+from app_locker import Passwords
+from app_locker import User, Password
 import random
 
 """
