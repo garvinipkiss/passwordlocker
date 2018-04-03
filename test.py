@@ -37,4 +37,41 @@ class TestPasswords(unittest.TestCase):
 
         self.new_Accounts.save_account()
         self.assertEqual(len(Passwords.password_list), 1)
-        
+
+        def test_save_multiple_Accounts(self):
+        """
+        This function can save multiple contacts.
+        """
+        test_Accounts = Passwords("Facebook", "newfacebookuser", "20")
+        """
+        We create our save_account function that will append every account and passwords.
+        """
+        test_Accounts.save_account()
+        self.new_Accounts.save_account()
+        self.assertEqual(len(Passwords.password_list), 2)
+
+    def test_find_by_account(self):
+        """
+        Test to check if we can find our passwords by account and display.
+        """
+        test_Accounts = Passwords("Facebook", "newfacebookuser", "20")
+        test_Accounts.save_account()
+        """
+        We create our save_account function that will append every account and passwords.
+        """
+        found_profile = Passwords.find_by_account("Facebook")
+        self.new_Accounts.save_account()
+        self.assertEqual(found_Accounts.account_password,
+                         test_Accounts.account_password)
+
+    def test_Accounts_exists(self):
+        """
+        Checks if we can return a boolean if we cannot find an account.
+        """
+
+        self.new_Accounts.save_account()
+        test_Accounts = Passwords("Facebook", "newfacebookuser", "20")
+        test_Accounts.save_account()
+
+        test_exists = Passwords.account_exists("Facebook")
+        self.assertTrue(test_exists)
