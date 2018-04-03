@@ -75,3 +75,30 @@ class TestPasswords(unittest.TestCase):
 
         test_exists = Passwords.account_exists("Facebook")
         self.assertTrue(test_exists)
+
+def test_display_Accounts(self):
+        """
+        This function displays a list of all the accounts saved.
+        """
+        self.assertEqual(Passwords.display_profiles(), Passwords.password_list)
+
+    def test_copy_password(self):
+        """
+        This function copys the password from an account.
+        """
+        self.new_Accounts.save_account()
+        Passwords.copy_password("Madthings")
+
+        self.assertEqual(self.new_Accounts.account_password, pyperclip.paste())
+
+    def test_password_gen(self):
+        """
+        We test if our password generator works.
+        """
+        self.new_Accounts.save_account()
+        random_password = self.new_Accounts.password_gen("lost")
+        self.assertNotEqual(random_password, self.new_Accounts.account_password)
+
+
+if __name__ == "__main__":
+    unittest.main()
