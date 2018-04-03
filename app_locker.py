@@ -57,25 +57,42 @@ class Password:
 
     def delete_password(self):
         Password.password_list.remove(self)
-
-    @classmethod
-    def find_by_account_name(cls,account_name):
-            for password in cls.password_list:
-                if password.account_name == account_name:
-                    return password
-
-    @classmethod
-    def password_exist(cls,account_name):
-        for password in cls.password_list:
-            if password.account_name == account_name:
+        
+@classmethod
+    def Accounts_exists(cls, account_name):
+        """
+        This are python decorators they check if an account exists from password_list and takes in the name and returns a boolean if the matching account is found.
+        """
+        for Accounts in cls.password_list:
+            if Accounts.account_name == account_name:
                 return True
         return False
 
     @classmethod
-    def display_password(cls):
+    def display_Accounts(cls):
+        """
+        This method returns different account list.
+        """
         return cls.password_list
 
     @classmethod
-    def copy_user_name(cls,user_name):
-        password_found = Password.find_by_account_name(user_name)
+    def find_by_account(cls, account_name):
+        """
+        This method takes in an account name and returns the password matching
+        the account.
+        """
+        for Accounts in cls.password_list:
+            if Accounts.account_name == account_name:
+                return profile
+
+    @classmethod
+    def copy_passwords(cls, account_name):
+        password_found = Passwords.find_by_account(account_name)
         pyperclip.copy(password_found.account_password)
+
+    @classmethod
+    def password_gen(cls, password_length):
+        string = "abcdefghigjkmnopqrstuvwxyz1234567890-_=+%[]{}\|"'?:;>./,`!@#$^&*()`'"
+        password = "".join(random.sample(string, int(password_length)))
+        accounts_passsword = password
+        return accounts_passsword
