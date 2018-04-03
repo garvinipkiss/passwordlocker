@@ -1,6 +1,5 @@
 #!/usr/bin/env python3.6
-from app_locker import Passwords
-from app_locker import User, Password
+from app_locker import User, Passwords
 import random
 
 """
@@ -109,7 +108,7 @@ def main():
     user_name = input()
     print("")
 
-    print(f"Hi {user_name}. ?")
+    print(f"Hi {user_name}.Whats your name ?")
     print("")
 
     while True:
@@ -118,9 +117,9 @@ def main():
               log in - log in to your password profiles
               log out - log out of you account
               exit - exit account list.""")
-        short_code = input().lower()
+        pass_code = input().lower()
         print("_" * 100)
-        if short_code == "create":
+        if pass_code == "create":
             print("New PasswordLocker Account")
             print("_" * 20)
 
@@ -129,7 +128,7 @@ def main():
 
             print("Enter last name -")
             l_name = input()
-    print("""
+            print("""
                   We can generate a password for you. Use the following keys:
                   generate- to generate a password
                   open- to create your own password.
@@ -145,11 +144,11 @@ def main():
                 print("Write a password that we will save for you")
                 password = input()
 
-            save_users(create_user(f_name, l_name, password))
+            save_user(create_user(locker_userName, locker_password))
 
             print("")
             print(
-                f"""New account created for - {f_name} {l_name} your account password is - {password}""")
+                f"""New account created for - {locker_userName}, {locker_password} your account password is - {password}""")
             print("")
             print("Use a good password")
         while True:
@@ -158,9 +157,9 @@ def main():
                   display - displays accounts,
                   find - find a password account,
                   exit - exit account list.""")
-            short_code = input().lower()
+            pass_code = input().lower()
             print("_" * 100)
-            if key == "creates":
+            if pass_code == "creates":
                 print(
                     "Which accounts do you want to save a password for? Eg Emails, social media, ")
                 account_name = input()
@@ -173,7 +172,7 @@ def main():
                 print("__" * 20)
                 if pass_code == "generate":
 
-    password_length = int(
+                    password_length = int(
                         input("How long do you want your password - "))
 
                     password = password_gen(password_length)
@@ -193,7 +192,7 @@ def main():
                 save_Accounts(create_account(
                     account_name, password, password_length))
 
-            elif key == "display":
+            elif pass_code == "display":
                 if display_Accounts():
                     print("Your various accounts")
                     print("")
@@ -206,7 +205,7 @@ def main():
                     print("No account is yet saved")
                     print("")
 
-            elif key == "find":
+            elif pass_code == "find":
                 print("in order to view your accounts password enter the accounts name")
 
                 account_name = input()
@@ -223,7 +222,7 @@ def main():
                     print("This account doesn't exist")
                     print("")
 
-                elif short_code == "exit":
+            elif pass_code == "exit":
                 print("")
                 print(
                     "*" * 20 + " Thank you for using my app and welcome again feed me at https://github.com/garvinipkiss your friendly dev :) " + "*" * 20)

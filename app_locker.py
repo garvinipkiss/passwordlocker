@@ -33,14 +33,7 @@ class User:
     def save_user(self):
         User.user_list.append(self)
 
-    # @classmethod
-    # def find_by_account_name(cls, account_name)
-    #     for user in cls.user_list:
-    #         if user.locker_userName == account_name:
-    #             return user
-
-
-class Password:
+class Passwords:
 
     password_list =[]
 
@@ -57,8 +50,8 @@ class Password:
 
     def delete_password(self):
         Password.password_list.remove(self)
-        
-@classmethod
+
+    @classmethod
     def Accounts_exists(cls, account_name):
         """
         This are python decorators they check if an account exists from password_list and takes in the name and returns a boolean if the matching account is found.
@@ -92,7 +85,7 @@ class Password:
 
     @classmethod
     def password_gen(cls, password_length):
-        string = "abcdefghigjkmnopqrstuvwxyz1234567890-_=+%[]{}\|"'?:;>./,`!@#$^&*()`'"
+        string = "abcdefghigjkmnopqrstuvwxyz1234567890-_=+%[]{}\|'?:;>./,`!@#$^&*()`'"
         password = "".join(random.sample(string, int(password_length)))
         accounts_passsword = password
         return accounts_passsword
