@@ -1,26 +1,28 @@
 #!/usr/bin/env python3.6
 import unittest
-from app import Passwords
 import pyperclip
+import string
+import random
+
+from app_locker import User, Credentials
 
 
-class TestPasswords(unittest.TestCase):
-
+class TestUser(unittest.TestCase):
+    """
+    Test that defines test cases for the user class bevaviours
+    """
     def setUp(self):
         """
-        setUp() method defines instructions that are
-        executed before each test method.
-        We then store it as an instance variable in the test class as:
-        self.new_password
+        set up method to run before each test cases
         """
-
-        self.new_Accounts = Passwords("Madthings", "shortgun", "lost")
-
-    def tearDown(self):
+        self.new_user = User("Berserk", "0000", "garvinipkiss@gmail.com")
+    def test_init(self):
         """
-        This cleans up after every test case.
+        Test case to test if the object is initialized properly
         """
-        Passwords.password_list = []
+        self.assertEqual(self.new_user.user_name,"Berserk")
+        self.assertEqual(self.new_user.password, "0000")
+        self.assertEqual(self.new_user.email, "garvinipkiss@gmail.com")
 
     def test_instance(self):
         """
