@@ -24,83 +24,107 @@ class TestUser(unittest.TestCase):
         self.assertEqual(self.new_user.password, "0000")
         self.assertEqual(self.new_user.email, "garvinipkiss@gmail.com")
 
-    def test_instance(self):
+    def tearDown(self):
         """
-        test_instance tests if the object created in setUp is initialized or has been instanciated properly.
+        Method that cleans up after each case has run.
+        """
+        User.user_list = []
+
+    def test_user_save(self):
+        """
+        Test case to test if the user object is saved into the user_list.
+        """
+        self.new_user.user_save()
+
+        self.assertEqual(len(User.user_list),1)
+    def test_save_multiple_user(self):
+        """
+        Test to check whether we can save multiple user objects.
+        """
+        self.new_user.user_save()
+        test_user = User("ninja","0000","ninja@gmail.com")
+        test_user.user_save()
+        self.assertEqual(len(User.user_list),2)
+
+    def test_display_users(self):
+        self.assertEqual(User.display_users(),User.user_list)
+
+class TestCredentials(unittest.TestCase):
+    """
+    Test that define test cases for credentials.
+    """
+    def setUp(self):
+        """
+        set up method to run before each test cases
+        """
+        self.new_credential = Credentials("Berserk","ninja", "Garvin")
+
+    def test_init(self):
+        """
+        Test case to test if the object is initialized properly.
         """
 
-        self.assertEqual(self.new_Accounts.account_name, "Madthings")
-        self.assertEqual(self.new_Accounts.account_password,
-                         "shortgun")
-        self.assertEqual(self.new_Accounts.password_length,
-                         "lost")
+        self.assertEqual(self.new_credential.account_name,"Berserk")
+        self.assertEqual(self.new_credential.account_username,"ninja")
+        self.assertEqual(self.new_credential.account_password,"Garvin")
 
-    def test_save_Accounts(self):
+    # def test_user_login(self):
+    #     """
+    #     Test case to test if we can find a user by password.
+    #     """
+    #     self.new_user.user_save()
+    #     test_user = User("ninja","0000","ninja@gmail.com")
+    #     test_user.user_save()
+    #     found_user = User.user_login("0000")
 
-        self.new_Accounts.save_account()
-        self.assertEqual(len(Passwords.password_list), 1)
+    #     self.assertEqual(found_user.password,test_user.password)
 
-        def test_save_multiple_Accounts(self):
-        """
-        This function can save multiple contacts.
-        """
-        test_Accounts = Passwords("Facebook", "newfacebookuser", "20")
-        """
-        We create our save_account function that will append every account and passwords.
-        """
-        test_Accounts.save_account()
-        self.new_Accounts.save_account()
-        self.assertEqual(len(Passwords.password_list), 2)
+    def tearDown(self):
+        Credentials.credential_list = []
+    # def test_check_user_exist(self):
+    #     """
+    #     test case to test if a user exists, returns true if a user exists,otherwise false.
+    #     """
+    #     self.User.new_user.user_save()
+    #     test_user = User("Berserk", "0000", "garvinipkiss@gmail.com")
+    #     test_user.user_save()
+    #     user_exist = User.user_exist("0000")
 
-    def test_find_by_account(self):
-        """
-        Test to check if we can find our passwords by account and display.
-        """
-        test_Accounts = Passwords("Facebook", "newfacebookuser", "20")
-        test_Accounts.save_account()
-        """
-        We create our save_account function that will append every account and passwords.
-        """
-        found_profile = Passwords.find_by_account("Facebook")
-        self.new_Accounts.save_account()
-        self.assertEqual(found_Accounts.account_password,
-                         test_Accounts.account_password)
+    #     self.assertTrue(user_exist)
 
-    def test_Accounts_exists(self):
+    def test_save_account(self):
         """
-        Checks if we can return a boolean if we cannot find an account.
+        Test case to test if the credential object is saved in to credential_list.
         """
+        self.new_credential.save_account()
+        self.assertEqual(len(Credentials.credential_list), 1)
 
-        self.new_Accounts.save_account()
-        test_Accounts = Passwords("Facebook", "newfacebookuser", "20")
-        test_Accounts.save_account()
-
-        test_exists = Passwords.account_exists("Facebook")
-        self.assertTrue(test_exists)
-
-def test_display_Accounts(self):
+    def test_save_multiple_account(self):
         """
-        This function displays a list of all the accounts saved.
+        Test case to test if we can save multiple credential objects.
         """
-        self.assertEqual(Passwords.display_profiles(), Passwords.password_list)
+        self.new_credential.save_account()
+        test_account = Credentials("linkedin","Garvin","Berserk")
+        test_account.save_account()
+        self.assertEqual(len(Credentials.credential_list),2)
 
-    def test_copy_password(self):
+    def test_delete_account(self):
         """
-        This function copys the password from an account.
+        Test case to test if we can remove an account from credential list.
         """
-        self.new_Accounts.save_account()
-        Passwords.copy_password("Madthings")
+        self.new_credential.save_account()
+        test_credential = Credentials("Berserk","linkedin","Garvin")
+        test_credential.save_account()
 
-        self.assertEqual(self.new_Accounts.account_password, pyperclip.paste())
+        self.new_credential.delete_account()
 
-    def test_password_gen(self):
+        self.assertEqual(len(Credentials.credential_list),1)
+
+    def test_display_accounts(self):
         """
-        We test if our password generator works.
+        Test case to test if lists of accounts are displayed.
         """
-        self.new_Accounts.save_account()
-        random_password = self.new_Accounts.password_gen("lost")
-        self.assertNotEqual(random_password, self.new_Accounts.account_password)
+        self.assertEqual(Credentials.display_accounts(),Credentials.credential_list)
 
-
-if __name__ == "__main__":
-    unittest.main()
+if __name__ == '__main__':
+  unittest.main(verbosity = 2)
