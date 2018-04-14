@@ -1,4 +1,4 @@
-# [passwordlocker](passwordlocker.png)
+![passwordlocker](passwordlocker.png)
 
 # Description
 
