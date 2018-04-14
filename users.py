@@ -1,47 +1,130 @@
+#!/usr/bin/env python3.6
+import unittest
 import pyperclip
+import string
+import random
 
-class Users:
+from app_locker import User, Credentials
+
+
+class TestUser(unittest.TestCase):
     """
-    This class generates new instances of users
+    Test that defines test cases for the user class bevaviours
     """
-    users_list = []
-
-    def __init__(self, first_name, last_name, password):
+    def setUp(self):
         """
-        __init__ method defines our object.
+        set up method to run before each test cases
+        """
+        self.new_user = User("Berserk", "0000", "garvinipkiss@gmail.com")
+    def test_init(self):
+        """
+        Test case to test if the object is initialized properly
+        """
+        self.assertEqual(self.new_user.user_name,"Berserk")
+        self.assertEqual(self.new_user.password, "0000")
+        self.assertEqual(self.new_user.email, "garvinipkiss@gmail.com")
+
+    def tearDown(self):
+        """
+        Method that cleans up after each case has run.
+        """
+        User.user_list = []
+
+    def test_user_save(self):
+        """
+        Test case to test if the user object is saved into the user_list.
+        """
+        self.new_user.user_save()
+
+        self.assertEqual(len(User.user_list),1)
+    def test_save_multiple_user(self):
+        """
+        Test to check whether we can save multiple user objects.
+        """
+        self.new_user.user_save()
+        test_user = User("ninja","0000","ninja@gmail.com")
+        test_user.user_save()
+        self.assertEqual(len(User.user_list),2)
+
+    def test_display_users(self):
+        self.assertEqual(User.display_users(),User.user_list)
+
+class TestCredentials(unittest.TestCase):
+    """
+    Test that define test cases for credentials.
+    """
+    def setUp(self):
+        """
+        set up method to run before each test cases
+        """
+        self.new_credential = Credentials("Berserk","ninja", "Garvin")
+
+    def test_init(self):
+        """
+        Test case to test if the object is initialized properly.
         """
 
-        self.first_name = first_name
-        self.last_name = last_name
-        self.password = password
+        self.assertEqual(self.new_credential.account_name,"Berserk")
+        self.assertEqual(self.new_credential.account_username,"ninja")
+        self.assertEqual(self.new_credential.account_password,"Garvin")
 
-    def save_users(self):
+    # def test_user_login(self):
+    #     """
+    #     Test case to test if we can find a user by password.
+    #     """
+    #     self.new_user.user_save()
+    #     test_user = User("ninja","0000","ninja@gmail.com")
+    #     test_user.user_save()
+    #     found_user = User.user_login("0000")
+
+    #     self.assertEqual(found_user.password,test_user.password)
+
+    def tearDown(self):
+        Credentials.credential_list = []
+    # def test_check_user_exist(self):
+    #     """
+    #     test case to test if a user exists, returns true if a user exists,otherwise false.
+    #     """
+    #     self.User.new_user.user_save()
+    #     test_user = User("Berserk", "0000", "garvinipkiss@gmail.com")
+    #     test_user.user_save()
+    #     user_exist = User.user_exist("0000")
+
+    #     self.assertTrue(user_exist)
+
+    def test_save_account(self):
         """
-        save_users saves our users objects into users_list
+        Test case to test if the credential object is saved in to credential_list.
         """
+        self.new_credential.save_account()
+        self.assertEqual(len(Credentials.credential_list), 1)
 
-        Users.users_list.append(self)
-
-    def delete_users(self):
+    def test_save_multiple_account(self):
         """
-        delete_users method deletes saved users from the users_list.
+        Test case to test if we can save multiple credential objects.
         """
-        Users.users_list.remove(self)
+        self.new_credential.save_account()
+        test_account = Credentials("linkedin","Garvin","Berserk")
+        test_account.save_account()
+        self.assertEqual(len(Credentials.credential_list),2)
 
-    @classmethod
-    def find_by_first_name(cls, first_name):
+    def test_delete_account(self):
+        """
+        Test case to test if we can remove an account from credential list.
+        """
+        self.new_credential.save_account()
+        test_credential = Credentials("Berserk","linkedin","Garvin")
+        test_credential.save_account()
 
-        for users in cls.users_list:
-            if users.first_name == first_name:
-                return users
+        self.new_credential.delete_account()
 
-    @classmethod
-    def users_exist(cls, first_name):
-        for users in cls.users_list:
-            if users.first_name == first_name:
-                return True
-        return False
+        self.assertEqual(len(Credentials.credential_list),1)
 
-    @classmethod
-    def display_users(cls):
-        return cls.users_list
+    def test_display_accounts(self):
+        """
+        Test case to test if lists of accounts are displayed.
+        """
+        self.assertEqual(Credentials.display_accounts(),Credentials.credential_list)
+
+if __name__ == '__main__':
+  unittest.main(verbosity = 2)
