@@ -92,8 +92,8 @@ class Credentials:
     """
     return cls.credential_list
   def generate_password():
-    char = string.ascii_uppercase + string.ascii_lowercase + string.digits + "~!@#$%^&*"
+    char = string.ascii_uppercase + string.ascii_lowercase + string.digits + "@#$%*"
 
-    gen_pass = "".join(random.choice(char) for _ in range(8))
+    gen_pass = "".join(random.choice(char) for _ in range(4))
 
     return gen_pass
