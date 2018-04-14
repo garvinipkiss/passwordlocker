@@ -1,6 +1,8 @@
-#usr/bin/env python3.6
+#usr/bin/env python3.6 app.py
 import pyperclip
 import random
+import string
+
 """
 1.Generate password
 2.Save password
@@ -19,73 +21,79 @@ Our application we will need only:
 2. Passwords - able to save different accounts Passwords.
 """
 
-
-
+# user_name =""
+# user_password =""
+global user_list
 class User:
+  """
+  Class that generates new instances of user
+  """
 
-    user_list = []
+  user_list = [] #empty user list
+  def __init__(self, user_name, password,email):
+    self.user_name = user_name
+    self.password = password
+    self.email = email
 
-    def __init__(self, locker_userName, locker_password):
-
-        self.locker_userName = locker_userName
-        self.locker_password = locker_password
-
-    def save_user(self):
-        User.user_list.append(self)
-
-class Passwords:
-
-    password_list =[]
-
-    def __init__(self,account_name,user_name,email,account_password):
+  def user_save(self):
+    """
+    saves user object into user object.
+    """
+    User.user_list.append(self)
+  @classmethod
+  def display_users(cls):
+    return cls.user_list
 
 
-        self.account_name = account_name
-        self.user_name = user_name
-        self.email = email
-        self.account_password = account_password
+class Credentials:
+  """
+  Class that generates new instances of credential object.
+  """
+  global user_list
+  credential_list =[]
+  def __init__(self, account_name, account_username, account_password):
+    self. account_name = account_name
+    self.account_username = account_username
+    self.account_password = account_password
+  @classmethod
+  def check_user_exist(cls,user_name,password):
+    """
+    Method that checks if a user exist from user list.
+    """
+    for user in User.user_list:
+      if user.user_name == user_name and user.password == password:
+        return True
+      return False
 
-    def save_password(self):
-        Password.password_list.append(self)
 
-    def delete_password(self):
-        Password.password_list.remove(self)
 
-    @classmethod
-    def Accounts_exists(cls, account_name):
-        """
-        This are python decorators they check if an account exists from password_list and takes in the name and returns a boolean if the matching account is found.
-        """
-        for Accounts in cls.password_list:
-            if Accounts.account_name == account_name:
-                return True
-        return False
+  # @classmethod
+  # def user_login(cls,password):
+  #   for user in cls.user_list:
+  #     if User.user_list.password == password:
+  #       return Credentials.credential_list
 
-    @classmethod
-    def display_Accounts(cls):
-        """
-        This method returns different account list.
-        """
-        return cls.password_list
+  def save_account(self):
+    """
+    save_account saves credential object into credential object.
+    """
+    Credentials.credential_list.append(self)
 
-    @classmethod
-    def find_by_account(cls, account_name):
-        """
-        This method takes in an account name and returns the password matching
-        the account.
-        """
-        for Accounts in cls.password_list:
-            if Accounts.account_name == account_name:
-                return profile
+  def delete_account(self):
+    """
+    delete_account method removes a saved cretential from credential list.
+    """
+    Credentials.credential_list.remove(self)
 
-    @classmethod
-    def copy_passwords(cls, account_name):
-        password_found = Passwords.find_by_account(account_name)
-        pyperclip.copy(password_found.account_password)
+  @classmethod
+  def display_accounts(cls):
+    """
+    Method that returns the credential list.
+    """
+    return cls.credential_list
+  def generate_password():
+    char = string.ascii_uppercase + string.ascii_lowercase + string.digits + "~!@#$%^&*"
 
-    @classmethod
-    def password_gen(cls, password_length):
-        string = "abcdefghigjkmnopqrstuvwxyz1234567890-_=+%[]{}\|'?:;>./,`!@#$^&*()`'"
-        password = "".join(random.sample(string, int(password_length)))
-        accounts_passsword = password
-        return accounts_passsword
+    gen_pass = "".join(random.choice(char) for _ in range(8))
+
+    return gen_pass
