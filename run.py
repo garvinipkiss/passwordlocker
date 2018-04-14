@@ -64,7 +64,7 @@ def main():
   print('\n')
   while True:
     print('.'* 60)
-    short_code = input("Use this short codes: cr- create a new user account, li - login into your account (if you are done), ex - exit from password locker \n").lower().strip()
+    short_code = input("Use this short codes: su-create/sign up a new user account, ls-to display users, li-to log in (if you are done), ex - exit from password locker \n").lower().strip()
     print('.'* 60)
 
     if short_code == "ex":
@@ -96,7 +96,7 @@ def main():
             print("no users available")
 
 
-    elif short_code == "ln":
+    elif short_code == "li":
         print("Please Enter your User name and your Password to log in")
         print('-' * 30)
         user_name = input("User name: ")
@@ -108,7 +108,7 @@ def main():
                 print('.'* 60)
                 short_code = input("Codes: cr - create an account, dp- display the list of your accounts, ex- exit the site \n").lower().strip()
                 print('.'* 60)
-                if short_code == "cr":
+                if short_code == "cn":
                     print("Create new credentials")
                     print('*' * 30)
                     account_name = input("Account name: ")
